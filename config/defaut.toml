@@ -1,0 +1,23 @@
+log_dir = 'logs' # Log directory
+
+drop_out = 0.5        # Dropout rate
+batch_size = 64       # Batch size
+momentum = 0.9        # Momentum
+weight_decay = 0.0005 # Weight decay
+
+[dataset]
+images_dir = 'dataset/VOCdevkit/VOC2012/JPEGImages'
+anno_dir = 'dataset/VOCdevkit/VOC2012/Annotations'
+sets_dir = 'dataset/VOCdevkit/VOC2012/ImageSets'
+seg_class_dir = 'dataset/VOCdevkit/VOC2012/SegmentationClass'
+seg_obj_dir = 'dataset/VOCdevkit/VOC2012/SegmentationObject'
+
+[model]
+# First Section
+[[model.layers]]
+type = 'conv'
+name = 'conv1_1'
+kernel_size = 7
+filters = 64
+stride = 2
+activation = 'relu'

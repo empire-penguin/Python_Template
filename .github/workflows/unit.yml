@@ -1,0 +1,26 @@
+name: Project Unit Tests
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+
+jobs:
+  project_unit_tests:
+    runs-on: [self-hosted, server]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python environment
+        run: |
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+      - name: Install project
+        run: |
+          source venv/bin/activate 
+          pip3 install .
+      - name: Run unit tests
+        run: |
+          source venv/bin/activate
+          pytest
+          
