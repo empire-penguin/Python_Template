@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+import os, sys
+
+from ${PROJECT_NAME}.parser import get_parser
+from ${PROJECT_NAME}.logger import get_root_logger, ROOT_LOGGER_NAME
+
+def main():    
+    parser = get_parser()
+    args = parser.parse_args()
+    logger = get_root_logger(ROOT_LOGGER_NAME, args.log_level, args.verbose)
+    logger.info("Starting ${PROJECT_NAME}...")
+    
+if __name__ == "__main__":
+    main()

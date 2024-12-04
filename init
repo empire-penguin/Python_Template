@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+
+import os
+
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+TEMPLATE_DIR = os.path.join(ROOT_DIR, "template")
+TEMPLATE_EXT='.temp'
+
+def envsubst(input_dir: str, output_dir: str):
+    directory = os.listdir(input_dir)
+    for file in directory:
+        if file.endswith(TEMPLATE_EXT):
+            # Replace the variables in the file
+            os.system(f"envsubst < {input_dir}/{file} > {output_dir}/{file.replace(TEMPLATE_EXT, '')}")
+            # delete the original file
+            os.system(f"rm {input_dir}/{file}")
+        else:
+            # Copy the file to the project directory
+            os.system(f"cp {input_dir}/{file} {output_dir}/{file}")
+            
+def delete_dir(directory: str):
+    os.system(f"rm -rf {directory}")
+
+def main():
+    env_file = os.path.join(ROOT_DIR, ".env")
+    if os.path.exists(env_file):
+        with open(env_file) as f:
+            for line in f:
+                if line.strip() and not line.startswith("#"):
+                    key, value = line.strip().split("=", 1)
+                    os.environ[key] = value.replace('"', '')
+    
+    
+    project_name = os.getenv("PROJECT_NAME")
+    project_version = os.getenv("PROJECT_VERSION")
+    project_desc = os.getenv("PROJECT_DESC")
+    author_first = os.getenv("AUTHOR_FIRST")
+    author_last = os.getenv("AUTHOR_LAST")
+    author_email = os.getenv("AUTHOR_EMAIL")
+    organization = os.getenv("ORGANIZATION")
+    
+    print(f"Project Name: {project_name}")
+    print(f"Project Version: {project_version}")
+    print(f"Project Description: {project_desc}")
+    print(f"Author: {author_first} {author_last}")
+    print(f"Author Email: {author_email}")
+    print(f"Organization: {organization}")
+
+    if not project_name:
+        print("Project Name is required")
+        return
+    
+    # Create the project directory
+    os.system(f"mkdir {project_name}")
+    
+    # All files that end in *.ini will need to be ran through `envsubst` to replace the variables
+    envsubst(TEMPLATE_DIR, project_name)
+    envsubst(ROOT_DIR, ROOT_DIR)
+    
+    delete_dir(TEMPLATE_DIR)
+            
+    
+
+if __name__ == "__main__":
+    main()

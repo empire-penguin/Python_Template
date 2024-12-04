@@ -1,0 +1,27 @@
+# ${PROJECT_NAME}
+>
+> ${PROJECT_DESC}
+
+## Installation
+
+1. Clone the repository `git clone git@github.com:ucsdwcsng/${PROJECT_NAME}.git`
+2. `cd` into the toolbox directory `cd ${PROJECT_NAME}`
+3. Create a virtual environment `python3 -m venv venv`
+4. Activate the virtual environment `source venv/bin/activate`
+5. Install the project as an editable package `pip3 install -e .`
+
+> [!TIP]
+> If any of the `python3` or `pip3` commands fail;
+> try appending them with `venv/bin/*` (e.g. `venv/bin/pip3`),
+> after creating and activating the virtual environment (`source venv/bin/activate`).
+
+## Run `${PROJECT_NAME}`
+
+1. **Fill this in**
+
+See here for the full list of parameters that can be passed to the `${PROJECT_NAME}` command
+
+```bash
+${PROJECT_NAME} -h
+
+```

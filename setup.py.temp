@@ -7,12 +7,12 @@ with open("README.md", "r") as f:
     long_description = f.read()
 
 setup(
-    name="project",
-    version="0.1.0",
-    description="A basic python project template",
-    author="First Last",
-    author_email="name@ucsd.edu",
-    url="https://github.com/name/project",
+    name="${PROJECT_NAME}",
+    version="${PROJECT_VERSION}",
+    description="${PROJECT_DESC}",
+    author="${AUTHOR_FIRST} ${AUTHOR_LAST}",
+    author_email="${AUTHOR_EMAIL}",
+    url="https://github.com/${ORGANIZATION}/${PROJECT_NAME}",
     packages=find_packages(),
     install_requires=dep_list,
     classifiers=[
@@ -28,4 +28,9 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     license="MIT",
+    entry_points={
+        'console_scripts': [
+            '${PROJECT_NAME} = ${PROJECT_NAME}.__main__:main'
+        ],
+    },
 )
